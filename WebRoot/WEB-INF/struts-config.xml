@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+<form-beans>
+	<form-bean name="loginForm" type="cn.lee.market.struts.actionform.LoginForm" />
+		
+	<form-bean name="registerForm" 
+				type="cn.lee.market.struts.actionform.RegisterForm">
+	</form-bean>
+	<form-bean name="postForm" 
+				type="cn.lee.market.struts.actionform.PostMessageForm">
+	</form-bean>
+	<form-bean name="searchConditionForm" 
+				type="cn.lee.market.struts.actionform.SearchConditionForm">
+	</form-bean>
+</form-beans>
+
+<action-mappings>
+		<action path="/index"
+			type="cn.lee.market.struts.action.IndexAction">
+			<forward name="homepage" path="/home.jsp" />
+			<forward name="myTest" path="/myTest.jsp" />
+		</action>
+		<action path="/login"
+			attribute="loginForm" 
+			name="loginForm"
+			input="/home.jsp"
+			type="cn.lee.market.struts.action.LoginAction">
+			<forward name="index" path="/index.do" />
+		</action>
+		<action path="/logout"
+			type="cn.lee.market.struts.action.LogoutAction">
+			<forward name="index" path="/index.do" />
+		</action>
+		<action path="/type"
+			type="cn.lee.market.struts.action.TypeMessageAction">
+			<forward name="typeMessage" path="/type.jsp" />
+		</action>
+		<action path="/searchMessage"
+			name="searchConditionForm"
+			type="cn.lee.market.struts.action.SearchMessageAction">
+			<forward name="searchMessage" path="/searchResult.jsp" />
+		</action>
+		<action path="/searchMessagePage"
+			type="cn.lee.market.struts.action.SearchMessagePageAction">
+			<forward name="searchMessage" path="/searchResult.jsp" />
+		</action>
+		<action path="/message"
+			type="cn.lee.market.struts.action.MessageDetailAction">
+			<forward name="messageDetail" path="/message.jsp" />
+		</action>
+		<action path="/addComment"
+			type="cn.lee.market.struts.action.AddCommentAction">
+			<forward name="messageDetail" path="/message.do" />
+		</action>
+		<action path="/delComment"
+			type="cn.lee.market.struts.action.DelCommentAction">
+			<forward name="messageDetail" path="/message.do" />
+		</action>
+		<action path="/topost"
+			type="cn.lee.market.struts.action.ToPostAction">
+			<forward name="messageform" path="/post.jsp" />
+			<forward name="noLogin" path="/index.do" />
+		</action>
+		<action path="/post"
+			name="postForm"
+			attribute="postForm"
+			input="/post.jsp"
+			type="cn.lee.market.struts.action.PostMessageAction">
+			<forward name="mymessage" path="/myMessage.do" />
+		</action>
+		<action path="/myMessage"
+			type="cn.lee.market.struts.action.MyMessageAction">
+			<forward name="myMessage" path="/myMessages.jsp" />
+		</action>
+		<action path="/myMessagePage"
+			type="cn.lee.market.struts.action.MyMessagePageAction">
+			<forward name="myMessage" path="/myMessages.jsp" />
+		</action>
+		<action path="/deleteMessage"
+			type="cn.lee.market.struts.action.DeleteMessageAction">
+			<forward name="myMessage" path="/myMessage.do" />
+		</action>
+		<action path="/user_info/readProtocol"
+			forward="/user_info/readProtocol.jsp">
+		</action>
+		<action path="/user_info/toRegister"
+			forward="/user_info/register.jsp">
+		</action>
+		<action path="/user_info/doRegister"
+				name="registerForm" 
+				attribute="registerForm"
+				input="/user_info/register.jsp"
+				type="cn.lee.market.struts.action.RegitserAction">
+			<forward name="regitserSucess" path="/user_info/registerSucess.jsp"/>
+			<forward name="regitserFalse" path="/user_info/register.jsp"/>
+		</action>
+		<action path="/guidelist"
+				type="cn.lee.market.struts.action.GuideListAction">
+				<forward name="guideList" path="/guidelist.jsp"/>
+		</action>
+		<action path="/article"
+				type="cn.lee.market.struts.action.ArticleAction">
+				<forward name="article" path="/article.jsp"/>
+		</action>
+		<action path="/article"
+				type="cn.lee.market.struts.action.ArticleAction">
+				<forward name="article" path="/article.jsp"/>
+		</action>
+		<action path="/user_info/modifyInfo"
+				forward="/user_info/modifyInfo.jsp">
+		</action>
+		<action path="/user_info/doModifyInfo"
+				type="cn.lee.market.struts.action.ModifyInfoAction"
+				>
+				<forward name="modifyInfo" path="/user_info/modifyInfo.jsp"></forward>
+		</action>
+		<action path="/toAddArticle"
+				forward="/addArticle.jsp">
+		</action>
+		<action path="/dealArticle"
+				type="cn.lee.market.struts.action.ToDealArticle">
+				<forward name="articleForm" path="/addArticle.jsp"></forward>
+				<forward name="guidelist" path="/guidelist.do"></forward>
+		</action>
+		<action path="/dealArticleForm"
+				type="cn.lee.market.struts.action.DealArticleFormAction"
+				input="/addArticle.jsp">
+				<forward name="guidelist" path="/guidelist.do"></forward>
+		</action>
+</action-mappings>
+<!-- ======================================== Message Resources Definitions -->
+
+    <message-resources parameter="MessageResources" />
+<!-- =================================================== Validator plugin -->
+<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" />
+</plug-in>
+</struts-config>
+
